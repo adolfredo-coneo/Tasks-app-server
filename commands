@@ -1,0 +1,11 @@
+//init Project
+npm init
+
+//Install express
+npm install express --save
+
+//running the server
+node server.js
+
+//git
+git init
