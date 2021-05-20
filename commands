@@ -7,5 +7,16 @@ npm install express --save
 //running the server
 node server.js
 
+//nodemon
+npm install --save-dev nodemon
+
+//axios
+npm install axios
+
 //git
 git init
+git add .
+git commit -m "initializing repository"
+git branch -M main
+git remote add origin https://github.com/adolfredo-coneo/Tasks-app-server.git
+git push -u origin main
