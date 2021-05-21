@@ -10,7 +10,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const Task_1 = require("../entities/Task");
-const axios = require("axios").default;
 exports.taskList = function (request, response) {
     return __awaiter(this, void 0, void 0, function* () {
         const nTasks = parseInt(request.params.n) || 3;
@@ -19,13 +18,15 @@ exports.taskList = function (request, response) {
     });
 };
 exports.taskPost = function (request, response) {
-    const result = markTask(request.params.id);
-    response.status(200).send(result);
+    return __awaiter(this, void 0, void 0, function* () {
+        const result = yield markTask(request.params.id);
+        response.status(200).send(result);
+    });
 };
 function getTasks(nTasks) {
     return __awaiter(this, void 0, void 0, function* () {
         return yield Task_1.Task.find({
-            select: ["id", "title"],
+            select: ["id", "title", "completed"],
             order: {
                 createdAt: "ASC",
             },
@@ -33,31 +34,10 @@ function getTasks(nTasks) {
         });
     });
 }
-function getTasksHipsum(nTasks) {
-    return __awaiter(this, void 0, void 0, function* () {
-        try {
-            const response = yield axios.get("https://hipsum.co/api/", {
-                params: {
-                    type: "hipster-centric",
-                    sentences: nTasks,
-                },
-            });
-            let titleArray = response.data.toString().split(". ");
-            let titles = titleArray.map((title) => {
-                return {
-                    UUID: 1,
-                    Title: title,
-                };
-            });
-            return titles;
-        }
-        catch (error) {
-            console.error(error);
-            return error;
-        }
-    });
-}
 function markTask(idTask) {
-    return `Task ${idTask} mark as completed`;
+    return __awaiter(this, void 0, void 0, function* () {
+        yield Task_1.Task.update({ id: idTask }, { completed: true });
+        return `Task ${idTask} mark as completed`;
+    });
 }
 //# sourceMappingURL=tasksController.js.map

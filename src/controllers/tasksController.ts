@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { Task } from "../entities/Task";
-const axios = require("axios").default;
+//const axios = require("axios").default;
 
 // Display list of tasks.
 exports.taskList = async function (request: Request, response: Response) {
@@ -10,15 +10,15 @@ exports.taskList = async function (request: Request, response: Response) {
 };
 
 // Post task log.
-exports.taskPost = function (request: Request, response: Response) {
-  const result = markTask(request.params.id);
+exports.taskPost = async function (request: Request, response: Response) {
+  const result = await markTask(request.params.id);
   response.status(200).send(result);
 };
 
-// Make a request to thedatabase with nTasks
+// Make a request to the database with nTasks
 async function getTasks(nTasks: number) {
   return await Task.find({
-    select: ["id", "title"],
+    select: ["id", "title", "completed"],
     order: {
       createdAt: "ASC",
     },
@@ -26,6 +26,13 @@ async function getTasks(nTasks: number) {
   });
 }
 
+// Mark a tark as completed - database
+async function markTask(idTask: string) {
+  await Task.update({ id: idTask }, { completed: true });
+  return `Task ${idTask} mark as completed`;
+}
+
+/*
 // Make a request to hipsum with nTasks
 async function getTasksHipsum(nTasks: number) {
   try {
@@ -52,7 +59,9 @@ async function getTasksHipsum(nTasks: number) {
   }
 }
 
-// Mark a tark as completed
-function markTask(idTask: string) {
+// Mark a tark as completed - Hipsum
+function markTaskHipsum(idTask: string) {
   return `Task ${idTask} mark as completed`;
 }
+
+*/
