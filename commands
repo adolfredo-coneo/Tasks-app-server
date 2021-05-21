@@ -13,6 +13,21 @@ npm install --save-dev nodemon
 //axios
 npm install axios
 
+//TypeORM
+npm install typeorm --save
+npm install reflect-metadata --save
+typeorm init
+
+//PostgreSQL
+npm install pg --save
+
+//Typescript
+npm install @types/node typescript --save-dev
+npm install @types/express --save-dev
+
+//typescript config file
+npx tsconfig.json 
+
 //git
 git init
 git add .
