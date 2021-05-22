@@ -23,11 +23,14 @@ const main = async () => {
   });*/
   const app = express();
   const port = process.env.PORT;
+  const origin = process.env.CORS_ORIGIN || "";
+  const originLocal = process.env.CORS_ORIGIN_LOCAL || "";
 
+  const allowlist = [origin, originLocal]
   app.set("trust proxy", 1);
   app.use(
     cors({
-      origin: process.env.CORS_ORIGIN,
+      origin: allowlist,
       credentials: true,
     })
   );

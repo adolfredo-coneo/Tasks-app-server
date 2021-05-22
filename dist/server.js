@@ -28,9 +28,12 @@ const main = () => __awaiter(void 0, void 0, void 0, function* () {
     });
     const app = express_1.default();
     const port = process.env.PORT;
+    const origin = process.env.CORS_ORIGIN || "";
+    const originLocal = process.env.CORS_ORIGIN_LOCAL || "";
+    const allowlist = [origin, originLocal];
     app.set("trust proxy", 1);
     app.use(cors_1.default({
-        origin: process.env.CORS_ORIGIN,
+        origin: allowlist,
         credentials: true,
     }));
     app.use(router_1.default);
