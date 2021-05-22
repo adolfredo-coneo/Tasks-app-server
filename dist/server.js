@@ -16,6 +16,7 @@ const express_1 = __importDefault(require("express"));
 const router_1 = __importDefault(require("./routes/router"));
 const typeorm_1 = require("typeorm");
 const Task_1 = require("./entities/Task");
+require('dotenv').config();
 const main = () => __awaiter(void 0, void 0, void 0, function* () {
     yield typeorm_1.createConnection({
         type: "postgres",
@@ -25,7 +26,7 @@ const main = () => __awaiter(void 0, void 0, void 0, function* () {
         entities: [Task_1.Task],
     });
     const app = express_1.default();
-    const port = 8080;
+    const port = process.env.PORT;
     app.use(router_1.default);
     app.listen(port, () => {
         console.log(`We are running at http://localhost:${port}`);

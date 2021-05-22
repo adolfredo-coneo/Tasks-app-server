@@ -28,6 +28,9 @@ npm install @types/express --save-dev
 //typescript config file
 npx tsconfig.json 
 
+//ENV
+npm install dotenv --save
+
 //git
 git init
 git add .

@@ -2,6 +2,7 @@ import express from "express";
 import routes from "./routes/router";
 import { createConnection } from "typeorm";
 import { Task } from "./entities/Task";
+require('dotenv').config();
 
 const main = async () => {
   await createConnection({
@@ -19,9 +20,8 @@ const main = async () => {
   conn.manager.save(task).then((task) => {
     console.log("Task has been saved. Task id is", task.id);
   });*/
-
   const app = express();
-  const port = 8080;
+  const port = process.env.PORT;
 
   app.use(routes);
 
