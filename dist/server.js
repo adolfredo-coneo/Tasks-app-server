@@ -30,7 +30,7 @@ const main = () => __awaiter(void 0, void 0, void 0, function* () {
     const port = process.env.PORT;
     app.set("trust proxy", 1);
     app.use(cors_1.default({
-        origin: "http://localhost:3000",
+        origin: process.env.CORS_ORIGIN,
         credentials: true,
     }));
     app.use(router_1.default);
