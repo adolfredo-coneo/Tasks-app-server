@@ -36,8 +36,18 @@ function getTasks(nTasks) {
 }
 function markTask(idTask) {
     return __awaiter(this, void 0, void 0, function* () {
-        yield Task_1.Task.update({ id: idTask }, { completed: true });
-        return `Task ${idTask} mark as completed`;
+        const responseTask = yield Task_1.Task.findOne(idTask);
+        if (!responseTask) {
+            return `Task ${idTask} is not a valid task`;
+        }
+        else if (responseTask.completed) {
+            return `Task ${idTask} is already completed`;
+        }
+        else {
+            const resp = yield Task_1.Task.update({ id: idTask }, { completed: true });
+            console.log(resp);
+            return `Task ${idTask} mark as completed`;
+        }
     });
 }
 //# sourceMappingURL=tasksController.js.map

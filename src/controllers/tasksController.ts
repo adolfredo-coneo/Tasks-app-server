@@ -28,8 +28,16 @@ async function getTasks(nTasks: number) {
 
 // Mark a tark as completed - database
 async function markTask(idTask: string) {
-  await Task.update({ id: idTask }, { completed: true });
-  return `Task ${idTask} mark as completed`;
+  const responseTask = await Task.findOne(idTask);
+  if (!responseTask) {
+    return `Task ${idTask} is not a valid task`;
+  } else if (responseTask.completed) {
+    return `Task ${idTask} is already completed`;
+  } else {
+    const resp = await Task.update({ id: idTask }, { completed: true });
+    console.log(resp);
+    return `Task ${idTask} mark as completed`;
+  }
 }
 
 /*

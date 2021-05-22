@@ -21,7 +21,7 @@ require('dotenv').config();
 const main = () => __awaiter(void 0, void 0, void 0, function* () {
     yield typeorm_1.createConnection({
         type: "postgres",
-        url: "postgresql://postgresta:TAphinx24..@tasksapp.cvnsjf6lry5p.us-east-2.rds.amazonaws.com/postgres",
+        url: process.env.DATABASE_URL,
         logging: true,
         synchronize: true,
         entities: [Task_1.Task],
