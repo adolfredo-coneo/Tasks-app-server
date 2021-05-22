@@ -16,6 +16,7 @@ const express_1 = __importDefault(require("express"));
 const router_1 = __importDefault(require("./routes/router"));
 const typeorm_1 = require("typeorm");
 const Task_1 = require("./entities/Task");
+const cors_1 = __importDefault(require("cors"));
 require('dotenv').config();
 const main = () => __awaiter(void 0, void 0, void 0, function* () {
     yield typeorm_1.createConnection({
@@ -27,6 +28,11 @@ const main = () => __awaiter(void 0, void 0, void 0, function* () {
     });
     const app = express_1.default();
     const port = process.env.PORT;
+    app.set("trust proxy", 1);
+    app.use(cors_1.default({
+        origin: "http://localhost:3000",
+        credentials: true,
+    }));
     app.use(router_1.default);
     app.listen(port, () => {
         console.log(`We are running at http://localhost:${port}`);

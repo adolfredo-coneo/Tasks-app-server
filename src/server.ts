@@ -2,6 +2,7 @@ import express from "express";
 import routes from "./routes/router";
 import { createConnection } from "typeorm";
 import { Task } from "./entities/Task";
+import cors from "cors";
 require('dotenv').config();
 
 const main = async () => {
@@ -22,6 +23,14 @@ const main = async () => {
   });*/
   const app = express();
   const port = process.env.PORT;
+
+  app.set("trust proxy", 1);
+  app.use(
+    cors({
+      origin: "http://localhost:3000",
+      credentials: true,
+    })
+  );
 
   app.use(routes);
 
