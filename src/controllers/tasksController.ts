@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 import { Task } from "../entities/Task";
-//const axios = require("axios").default;
 
 // Display list of tasks.
 exports.taskList = async function (request: Request, response: Response) {
@@ -39,37 +38,3 @@ async function markTask(idTask: string) {
     return `Task ${idTask} mark as completed`;
   }
 }
-
-/*
-// Make a request to hipsum with nTasks
-async function getTasksHipsum(nTasks: number) {
-  try {
-    const response = await axios.get("https://hipsum.co/api/", {
-      params: {
-        type: "hipster-centric",
-        sentences: nTasks,
-      },
-    });
-
-    let titleArray = response.data.toString().split(". ");
-
-    let titles = titleArray.map((title: string) => {
-      return {
-        UUID: 1,
-        Title: title,
-      };
-    });
-
-    return titles;
-  } catch (error) {
-    console.error(error);
-    return error;
-  }
-}
-
-// Mark a tark as completed - Hipsum
-function markTaskHipsum(idTask: string) {
-  return `Task ${idTask} mark as completed`;
-}
-
-*/

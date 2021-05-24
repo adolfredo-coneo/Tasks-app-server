@@ -40,10 +40,6 @@ git remote add origin https://github.com/adolfredo-coneo/Tasks-app-server.git
 git push -u origin main
 
 
-/*let task = new Task();
-task.title = "Ado and Angie";
-task.completed = false;
-
-conn.manager.save(task).then((task) => {
-console.log("Task has been saved. Task id is", task.id);
-});*/
+//Docker
+docker build . -t aconeo/task-app-server
+docker run -p 49160:4000 -d aconeo/task-app-server
